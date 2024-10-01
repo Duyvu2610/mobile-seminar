@@ -25,8 +25,11 @@ namespace eCommerce.Model
         public ICommand FeaturedTapCommand { get; set; }
         public ICommand ItemTapCommand { get; set; }
         public ICommand CatTapCommand { get; set; }
+
+        private readonly CategoryApi _categoryApi;
         public ItemPreviewViewModel()
         {
+            _categoryApi = new CategoryApi();
             source = new List<ItemsPreview>();
             source1 = new List<FeaturedBrands>();
             source2 = new List<Category>();
@@ -53,42 +56,12 @@ namespace eCommerce.Model
         }
 
        
-        void CreateCategoriesCollection()
+        async void CreateCategoriesCollection()
         {
-            source2.Add(new Category
-            {
-                image = "Icon_Mens_Shoe",
-                title = "Men",
-                link = "5693 Products"
-            });
-            source2.Add(new Category
-            {
-                image = "women_shoe",
-                title = "Women",
-                link = "1124 Products"
-            });
-            source2.Add(new Category
-            {
-                image = "devices",
-                title = "Devices",
-                link = "5693 Products"
-            });
+            List<Category> categoriesList = await _categoryApi.GetCategories();
 
-            source2.Add(new Category
-            {
-                image = "headphone",
-                title = "Gadgets",
-                link = "5693 Products"
-            });
-
-            source2.Add(new Category
-            {
-                image = "Icon_Gaming",
-                title = "Gaming",
-                link = "5693 Products"
-            });
-
-            categories = new ObservableCollection<Category>(source2);
+            categories = new ObservableCollection<Category>(categoriesList);
+            OnPropertyChanged(nameof(categories));
         }
         void CreateFeaturedItemCollection()
         {

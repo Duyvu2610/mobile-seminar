@@ -54,14 +54,6 @@
                             <ecommerce:CustomEntry HorizontalOptions="FillAndExpand" />
                         </StackLayout>
                     </Frame>
-                    <StackLayout>
-                        <Image
-                            Margin="13,0,0,0"
-                            Aspect="AspectFit"
-                            HeightRequest="40"
-                            Source="Search_Camera"
-                            WidthRequest="40" />
-                    </StackLayout>
                 </StackLayout>
 
                 <ScrollView VerticalScrollBarVisibility="Never">
