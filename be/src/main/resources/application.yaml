@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: be
+  datasource:
+    url: jdbc:postgresql://dpg-crtvrm68ii6s73aprnig-a.singapore-postgres.render.com:5432/mobile_lj75
+    username: duyvu
+    password: ijzGLl9i6DYLRK1roccTfu4ngSLxwUvu
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
