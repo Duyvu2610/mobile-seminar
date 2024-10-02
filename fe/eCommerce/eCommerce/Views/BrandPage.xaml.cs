@@ -50,10 +50,16 @@ namespace eCommerce.Views
 
         async void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {
+            // Lấy item được chọn
+            var selectedItem = e.CurrentSelection.FirstOrDefault() as ItemsPreview;
 
-            await Navigation.PushModalAsync(new ProductPage());
+            if (selectedItem != null)
+            {
+                // Truyền id vào ProductPage
+                await Navigation.PushModalAsync(new ProductPage(selectedItem.Id));
+            }
         }
 
-      
+
     }
 }

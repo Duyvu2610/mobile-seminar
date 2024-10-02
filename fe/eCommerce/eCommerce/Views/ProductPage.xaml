@@ -32,8 +32,21 @@
                                     FontAttributes="Bold"
                                     FontSize="26"
                                     HorizontalOptions="StartAndExpand"
-                                    Text="Nike Dri-FIT Long Sleeve"
+                                    Text="{Binding SelectedItem.name}"
                                     TextColor="Black"
+                                    VerticalTextAlignment="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+
+                                <Label
+                                    FontSize="16"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{Binding SelectedItem.brand, StringFormat='Brand: {0}'}"
+                                    TextColor="Gray"
                                     VerticalTextAlignment="Center">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
@@ -165,6 +178,7 @@
                                         </OnPlatform>
                                     </Label.FontFamily>
                                 </Label>
+                                   
 
                                 <Label
                                     FontAttributes="Bold"
@@ -352,7 +366,7 @@
                                 Margin="30,0,35,0"
                                 FontSize="18"
                                 HorizontalOptions="Center"
-                                Text="$1500"
+                                Text="{Binding SelectedItem.price, StringFormat='${0}'}"
                                 TextColor="#00C569"
                                 VerticalOptions="CenterAndExpand"
                                 VerticalTextAlignment="Center">

@@ -38,8 +38,10 @@ namespace eCommerce.Model
             CreateCategoriesCollection();
 
             ItemTapCommand = new Command<ItemsPreview>(items =>
-            {                
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync((new ProductPage()));
+            {
+                // Truyền itemId vào ProductPage
+                long itemId = items.Id;  // Giả sử ItemsPreview có thuộc tính Id
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new ProductPage(itemId));
             });
 
             CatTapCommand = new Command<Category>(items =>
@@ -90,6 +92,7 @@ namespace eCommerce.Model
         {
             source.Add(new ItemsPreview
             {
+                Id = 1,
                 ImageUrl = "Image1",
                 Name= "BeoPlay Speaker",
                 brand= "Bang and Olufsen",
@@ -97,6 +100,7 @@ namespace eCommerce.Model
             });
             source.Add(new ItemsPreview
             {
+                Id = 1,
                 ImageUrl = "Image2",
                 Name = "Leather Wristwatch",
                 brand = "Tag Heuer",
@@ -104,6 +108,7 @@ namespace eCommerce.Model
             });
             source.Add(new ItemsPreview
             {
+                Id = 1,
                 ImageUrl = "Image3",
                 Name = "Smart Bluetooth Speaker",
                 brand = "Google LLC",
@@ -111,6 +116,7 @@ namespace eCommerce.Model
             });
             source.Add(new ItemsPreview
             {
+                Id = 1,
                 ImageUrl = "Image4",
                 Name = "Smart Luggage",
                 brand = "Smart Inc",

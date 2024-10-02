@@ -6,6 +6,7 @@ namespace eCommerce.Model
 {
     public class ItemsPreview
     {
+        public long Id { get; set; }
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string brand { get; set; }

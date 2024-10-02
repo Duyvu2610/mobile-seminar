@@ -1,20 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
+using Xamarin.Forms;
 
 namespace eCommerce.Model
 {
-    public class ProductViewModel: INotifyPropertyChanged
+    public class ProductViewModel : INotifyPropertyChanged
     {
         readonly IList<Reviews> source;
         public ObservableCollection<Reviews> itemPreview { get; private set; }
 
+        private Item _selectedItem;
+        public Item SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ProductViewModel()
         {
-            source = new List<Reviews>();            
+            source = new List<Reviews>();
             CreateItemCollection();
         }
 
@@ -25,21 +35,7 @@ namespace eCommerce.Model
                 image = "user1",
                 name = "Samuel Smith",
                 review = "Wonderful jean, perfect gift for my girl for our anniversary!",
-                rating = "4"
-            });
-            source.Add(new Reviews
-            {
-                image = "user2",
-                name = "Beth Aida",
-                review = "I love this, paired it with a nice blouse and all eyes on me.",
-                rating = "3"
-            });
-            source.Add(new Reviews
-            {
-                image = "user1",
-                name = "Samuel Smith",
-                review = "Wonderful jean, perfect gift for my girl for our anniversary!",
-                rating = "4"
+                rating = "1"
             });
             source.Add(new Reviews
             {
@@ -49,6 +45,13 @@ namespace eCommerce.Model
                 rating = "3"
             });
             itemPreview = new ObservableCollection<Reviews>(source);
+        }
+
+        public async void LoadProductDetails(long id)
+        {
+            var itemApi = new ItemApi();
+            var itemDetails = await itemApi.GetItemDetails(id); 
+            SelectedItem = itemDetails;
         }
 
         #region INotifyPropertyChanged

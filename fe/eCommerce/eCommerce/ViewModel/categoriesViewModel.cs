@@ -30,7 +30,9 @@ namespace eCommerce.Model
 
             ItemTapCommand = new Command<ItemsPreview>(items =>
             {
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync((new ProductPage()));
+                // Truyền itemId vào ProductPage
+                long itemId = items.Id;  // Giả sử ItemsPreview có thuộc tính Id
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync((new ProductPage(itemId)));
             });
 
             FeaturedTapCommand = new Command<FeaturedBrands>(brand =>
