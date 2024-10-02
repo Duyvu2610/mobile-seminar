@@ -22,7 +22,7 @@
                     x:Name="imageMain"
                     Aspect="AspectFill"
                     HeightRequest="200"
-                    Source="Image10" />
+                    Source="{Binding SelectedItem.imageUrl}" />
                 <ScrollView Scrolled="ScrollView_Scrolled">
                     <StackLayout>
                         <StackLayout Margin="15">
