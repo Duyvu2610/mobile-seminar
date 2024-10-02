@@ -14,7 +14,7 @@ public class CategoryApi
 
     public async Task<List<Category>> GetCategories()
     {
-        string url = "http://172.29.224.1:8080/category";
+        string url = "http://10.0.2.2:8080/category";
         var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
 
