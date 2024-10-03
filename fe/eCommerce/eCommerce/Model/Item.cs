@@ -4,13 +4,12 @@ using System.Text;
 
 namespace eCommerce.Model
 {
-    public class ItemsPreview
+    public class Item
     {
-        public long Id { get; set; }
-        public string ImageUrl { get; set; }
-        public string Name { get; set; }
+        public long id { get; set; }
+        public string imageUrl { get; set; }
+        public string name { get; set; }
         public string brand { get; set; }
         public string price { get; set; }
-
     }
 }
