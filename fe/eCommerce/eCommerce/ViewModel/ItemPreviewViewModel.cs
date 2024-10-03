@@ -21,22 +21,29 @@ namespace eCommerce.Model
 
         readonly IList<Category> source2;
         public ObservableCollection<Category> categories { get; private set; }
+        public ObservableCollection<ItemsPreview> items{ get; private set; }
+        public ObservableCollection<ItemsPreview> itemsRecommend { get; private set; }
 
         public ICommand FeaturedTapCommand { get; set; }
         public ICommand ItemTapCommand { get; set; }
         public ICommand CatTapCommand { get; set; }
 
         private readonly CategoryApi _categoryApi;
+        private readonly ItemApi _itemApi;
         public ItemPreviewViewModel()
         {
+            
             _categoryApi = new CategoryApi();
+            _itemApi = new ItemApi();
             source = new List<ItemsPreview>();
             source1 = new List<FeaturedBrands>();
             source2 = new List<Category>();
+            
             CreateItemCollection();
             CreateFeaturedItemCollection();
             CreateCategoriesCollection();
-
+            CreatItemBestSellingColection();
+            CreatItemsRecommendColection();
             ItemTapCommand = new Command<ItemsPreview>(items =>
             {
                 // Truyền itemId vào ProductPage
@@ -64,6 +71,20 @@ namespace eCommerce.Model
 
             categories = new ObservableCollection<Category>(categoriesList);
             OnPropertyChanged(nameof(categories));
+        }
+        async void CreatItemBestSellingColection()
+        {
+            List<ItemsPreview> listItems = await _itemApi.GetItemBestSellingg();
+            items = new ObservableCollection<ItemsPreview>(listItems);
+            OnPropertyChanged(nameof(items));
+
+        }
+        async void CreatItemsRecommendColection()
+        {
+            List<ItemsPreview> listItemsRecommend = await _itemApi.GetItemsRecommend();
+            itemsRecommend = new ObservableCollection<ItemsPreview>(listItemsRecommend);
+            OnPropertyChanged(nameof(itemsRecommend));
+
         }
         void CreateFeaturedItemCollection()
         {

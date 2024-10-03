@@ -1,5 +1,6 @@
 ﻿using eCommerce.Model;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,11 +15,31 @@ public class ItemApi
 
     public async Task<Item> GetItemDetails(long id)
     {
-        string url = $"http://172.29.224.1:8080/items/{id}";
+        string url = $"http://192.168.0.104:8080/items/{id}";
         var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
 
         string jsonResponse = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<Item>(jsonResponse);
+    }
+    public async Task<List<ItemsPreview>> GetItemBestSellingg()
+    {
+        string url = $"http://192.168.0.104:8080/items/best-selling";   
+        var response = await _httpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+
+        string jsonResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(jsonResponse);
+        return JsonConvert.DeserializeObject<List<ItemsPreview>>(jsonResponse);
+    }
+    public async Task<List<ItemsPreview>> GetItemsRecommend()
+    {
+        string url = $"http://192.168.0.104:8080/items/recommended";
+        var response = await _httpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+
+        string jsonResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(jsonResponse);
+        return JsonConvert.DeserializeObject<List<ItemsPreview>>(jsonResponse);
     }
 }
