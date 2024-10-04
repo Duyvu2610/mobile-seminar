@@ -10,7 +10,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace eCommerce.Model
-{  
+{
     public class categoriesViewModel : INotifyPropertyChanged
     {
         readonly IList<FeaturedBrands> source1;
@@ -18,61 +18,49 @@ namespace eCommerce.Model
 
         readonly IList<ItemsPreview> source;
         public ObservableCollection<ItemsPreview> itemPreview { get; private set; }
-
+        private readonly CategoryApi _categoryApi;
         public ICommand FeaturedTapCommand { get; set; }
         public ICommand ItemTapCommand { get; set; }
+
         public categoriesViewModel()
         {
+            _categoryApi = new CategoryApi();
             source = new List<ItemsPreview>();
             source1 = new List<FeaturedBrands>();
-            CreateItemCollection();
             CreateFeaturedItemCollection();
-
+            GetListByIdCategory();
             ItemTapCommand = new Command<ItemsPreview>(items =>
             {
-                // Truyền itemId vào ProductPage
-                long itemId = items.Id;  // Giả sử ItemsPreview có thuộc tính Id
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync((new ProductPage(itemId)));
+                // Assuming ItemsPreview has an Id property
+                //cái này là gán cứng cái id là 1 đk
+                //bth nó khác nó lấy id ra nè
+                Console.WriteLine(items.Id);
+                long itemId = items.Id;
+                // Call the method to get the list by category ID
+                GetListByIdCategory();
+                // Navigate to ProductPage with the itemId
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new ProductPage(itemId));
             });
-
+            
             FeaturedTapCommand = new Command<FeaturedBrands>(brand =>
             {
                 string selBrand = brand.brand;
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new BrandPage(selBrand)));
             });
-        }       
+        }
 
-        void CreateItemCollection()
+        async void GetListByIdCategory()
         {
-            source.Add(new ItemsPreview
+            long x =1;
+            source.Clear();
+            var items = await _categoryApi.GetItemsByCategoryId(x);
+            foreach (var item in items)
             {
-                ImageUrl = "Image3",
-                Name = "Smart Bluetooth Speaker",
-                brand = "Google LLC",
-                price = "$90"
-            });
-            source.Add(new ItemsPreview
-            {
-                ImageUrl = "Image5",
-                Name = "Smart Luggage",
-                brand = "Smart Inc",
-                price = "$450"
-            });
-            source.Add(new ItemsPreview
-            {
-                ImageUrl = "Image6",
-                Name = "Wireless Remote",
-                brand = "Tesla Inc",
-                price = "$790"
-            });
-            source.Add(new ItemsPreview
-            {
-                ImageUrl = "Image4",
-                Name = "Airpods",
-                brand = "Apple Inc",
-                price = "$120"
-            });
+                source.Add(new ItemsPreview { Id = item.id, ImageUrl = item.imageUrl, Name = item.name, brand = item.brand, price = item.price });
+            }
             itemPreview = new ObservableCollection<ItemsPreview>(source);
+            OnPropertyChanged(nameof(itemPreview));
+            Console.WriteLine("da goi");
         }
 
         void CreateFeaturedItemCollection()
@@ -99,7 +87,6 @@ namespace eCommerce.Model
             featuredItemPreview = new ObservableCollection<FeaturedBrands>(source1);
         }
 
-      
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -109,6 +96,4 @@ namespace eCommerce.Model
         }
         #endregion
     }
-
-
 }
