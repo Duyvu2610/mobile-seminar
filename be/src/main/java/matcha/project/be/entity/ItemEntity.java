@@ -36,6 +36,9 @@ public class ItemEntity {
     @Column(nullable = false, name = "amount_sold")
     Long amountSold;
 
+    @Column(nullable = false)
+    Boolean isRecommended;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false, name = "created_at")
     LocalDateTime createdAt;
@@ -43,4 +46,7 @@ public class ItemEntity {
     @UpdateTimestamp
     @Column(nullable = false, name = "updated_at")
     LocalDateTime updatedAt;
+
+
+
 }

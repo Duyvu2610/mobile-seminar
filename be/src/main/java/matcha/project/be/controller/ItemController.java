@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/items")
 @RequiredArgsConstructor
@@ -21,5 +23,22 @@ public class ItemController {
     @GetMapping("/{id}")
     public ResponseEntity<ItemEntity> getItemById(@PathVariable Long id) {
         return ResponseEntity.ok(itemService.getItemById(id));
+    }
+    @GetMapping("/best-selling")
+    public ResponseEntity<List<ItemEntity>> getBestSellingItems() {
+        List<ItemEntity> bestSellingItems = itemService.getBestSellingItems();
+        return ResponseEntity.ok(bestSellingItems);
+    }
+
+    @GetMapping("/best-selling/{categoryId}")
+    public ResponseEntity<List<ItemEntity>> getBestSellingItemsByCategory(@PathVariable Long categoryId) {
+        List<ItemEntity> bestSellingItems = itemService.getBestSellingItemsByCategory(categoryId);
+        return ResponseEntity.ok(bestSellingItems);
+    }
+
+    @GetMapping("/recommended")
+    public ResponseEntity<List<ItemEntity>> getRecommendedItems() {
+        List<ItemEntity> recommendedItems = itemService.getRecommendedItems();
+        return ResponseEntity.ok(recommendedItems);
     }
 }
