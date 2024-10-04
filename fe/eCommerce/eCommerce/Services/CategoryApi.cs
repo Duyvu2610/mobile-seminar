@@ -21,4 +21,13 @@ public class CategoryApi
         string jsonResponse = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<List<Category>>(jsonResponse);
     }
+    public async Task<List<Item>> GetItemsByCategoryId(int categoryId)
+        {
+            string url = $"http://10.0.2.2:8080/category/{categoryId}";
+            var response = await _httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            string jsonResponse = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<Item>>(jsonResponse);
+        }
 }
