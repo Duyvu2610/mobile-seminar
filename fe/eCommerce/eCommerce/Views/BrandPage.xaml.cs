@@ -1,6 +1,7 @@
 ﻿using eCommerce.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,19 +12,71 @@ using Xamarin.Forms.Xaml;
 namespace eCommerce.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
+
     public partial class BrandPage : TabbedPage
     {
+
+        private readonly ItemApi _itemApi;
+        public ObservableCollection<ItemsPreview> itemsBestselling { get; private set; }
+
         public BrandPage(String name)
         {
+            _itemApi = new ItemApi();
             InitializeComponent();
+
             title.Text = name;
-            this.ItemsSource = new MainClass[] {
-                new MainClass ("All",new List<ItemsPreview>(){ new ItemsPreview {ImageUrl = "Image1",Name = "Smart Bluetooth Speaker", brand = "Bang and Olufsen",price = "$90"}, new ItemsPreview { ImageUrl = "Image7", Name = "B&o Desk Lamp", brand = "Bang and Olufsen", price = "$450" },new ItemsPreview { ImageUrl = "Image8", Name = "BeoPlay Stand Speaker", brand = "Bang and Olufsen", price = "$300" } }),
-                new MainClass ("Headphones",new List<ItemsPreview>(){ new ItemsPreview {ImageUrl = "Image1",Name = "Smart Bluetooth Speaker", brand = "Bang and Olufsen",price = "$90"}, new ItemsPreview { ImageUrl = "Image7", Name = "B&o Desk Lamp", brand = "Bang and Olufsen", price = "$450" },new ItemsPreview { ImageUrl = "Image8", Name = "BeoPlay Stand Speaker", brand = "Bang and Olufsen", price = "$300" } }),
-                new MainClass ("Speakers",new List<ItemsPreview>(){ new ItemsPreview {ImageUrl = "Image1",Name = "Smart Bluetooth Speaker", brand = "Bang and Olufsen",price = "$90"}, new ItemsPreview { ImageUrl = "Image7", Name = "B&o Desk Lamp", brand = "Bang and Olufsen", price = "$450" },new ItemsPreview { ImageUrl = "Image8", Name = "BeoPlay Stand Speaker", brand = "Bang and Olufsen", price = "$300" } }),
-                new MainClass ("Microphones",new List<ItemsPreview>(){ new ItemsPreview {ImageUrl = "Image1",Name = "Smart Bluetooth Speaker", brand = "Bang and Olufsen",price = "$90"}, new ItemsPreview { ImageUrl = "Image7", Name = "B&o Desk Lamp", brand = "Bang and Olufsen", price = "$450" },new ItemsPreview { ImageUrl = "Image8", Name = "BeoPlay Stand Speaker", brand = "Bang and Olufsen", price = "$300" } }),
+            if (name.Equals("Recommended"))
+            {
                 
-            };
+                LoadRecommmedItems();
+            }
+            else {
+                
+                LoadBestSellingItems();
+            }
+
+            
+        }
+        private async void LoadRecommmedItems()
+        {
+            try
+            {
+
+                List<ItemsPreview> recommendItems = await _itemApi.GetItemsRecommend();
+
+
+                this.ItemsSource = new MainClass[]
+                {
+
+            new MainClass("All", recommendItems)
+                };
+            }
+            catch (Exception ex)
+            {
+
+                await DisplayAlert("Error", "Unable to load best-selling items.", "OK");
+            }
+        }
+        private async void LoadBestSellingItems()
+        {
+            try
+            {
+               
+                List<ItemsPreview> bestSellingItems = await _itemApi.GetItemBestSellingg();
+
+                
+                this.ItemsSource = new MainClass[]
+                {
+          
+            new MainClass("All", bestSellingItems)
+                };
+            }
+            catch (Exception ex)
+            {
+                
+                await DisplayAlert("Error", "Unable to load best-selling items.", "OK");
+            }
         }
 
         class MainClass
@@ -47,6 +100,7 @@ namespace eCommerce.Views
             await Navigation.PopModalAsync();
 
         }
+       
 
         async void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {

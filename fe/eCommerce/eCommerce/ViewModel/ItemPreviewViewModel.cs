@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,7 +76,8 @@ namespace eCommerce.Model
         async void CreatItemBestSellingColection()
         {
             List<ItemsPreview> listItems = await _itemApi.GetItemBestSellingg();
-            items = new ObservableCollection<ItemsPreview>(listItems);
+            List<ItemsPreview> listItems1 = listItems.Take(2).ToList();
+            items = new ObservableCollection<ItemsPreview>(listItems1);
             OnPropertyChanged(nameof(items));
 
         }
