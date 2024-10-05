@@ -17,6 +17,7 @@ public class CategoryApi
     {
         string url = "http://192.168.171.1:8080/category";
         var response = await _httpClient.GetAsync(url);
+        var response = await _httpClient.GetAsync("/category");
         response.EnsureSuccessStatusCode();
 
         string jsonResponse = await response.Content.ReadAsStringAsync();
