@@ -36,6 +36,9 @@ public class ItemEntity {
     @Column(nullable = false, name = "amount_sold")
     Long amountSold;
 
+    @Column(name = "description")
+    String description;
+
     @Column(nullable = false)
     Boolean isRecommended;
 

@@ -11,5 +11,6 @@ namespace eCommerce.Model
         public string name { get; set; }
         public string brand { get; set; }
         public string price { get; set; }
+        public string description { get; set; }
     }
 }
