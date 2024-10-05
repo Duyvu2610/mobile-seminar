@@ -24,8 +24,8 @@ public class ItemEntity {
     @Column(nullable = false)
     String brand;
 
-    @Column(nullable = false)
-    Double price;
+    @Column(nullable = false, name = "price")
+    Integer price;
 
     @Column(name = "image_url")
     String imageUrl;

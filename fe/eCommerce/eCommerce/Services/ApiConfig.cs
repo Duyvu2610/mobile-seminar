@@ -12,7 +12,7 @@ public class ApiConfig
     {
         HttpClient _httpClient = new HttpClient
         {
-            BaseAddress = new Uri("http://10.0.2.2:8080") // Đặt địa chỉ cơ sở  
+            BaseAddress = new Uri("http://10.0.2.2:8080") 
         };
         _httpClient.DefaultRequestHeaders.Accept.Clear();
         _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
