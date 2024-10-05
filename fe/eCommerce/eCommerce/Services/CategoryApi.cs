@@ -9,13 +9,12 @@ public class CategoryApi
     private readonly HttpClient _httpClient;
     public CategoryApi()
     {
-        _httpClient = new HttpClient();
+        _httpClient = ApiConfig.GetClient();
     }
 
     public async Task<List<Category>> GetCategories()
     {
-        string url = "http://10.0.2.2:8080/category";
-        var response = await _httpClient.GetAsync(url);
+        var response = await _httpClient.GetAsync("/category");
         response.EnsureSuccessStatusCode();
 
         string jsonResponse = await response.Content.ReadAsStringAsync();

@@ -169,23 +169,8 @@
                                 <Label
                                     FontSize="14"
                                     HorizontalOptions="StartAndExpand"
-                                    Text="Nike Dri-FIT is a polyester fabric designed to help you keep dry so you can more comfortably work harder, longer."
+                                    Text="{Binding SelectedItem.description}"
                                     TextColor="Black"
-                                    VerticalTextAlignment="Center">
-                                    <Label.FontFamily>
-                                        <OnPlatform x:TypeArguments="x:String">
-                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
-                                        </OnPlatform>
-                                    </Label.FontFamily>
-                                </Label>
-                                   
-
-                                <Label
-                                    FontAttributes="Bold"
-                                    FontSize="14"
-                                    HorizontalOptions="StartAndExpand"
-                                    Text="Read More"
-                                    TextColor="#00C569"
                                     VerticalTextAlignment="Center">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
