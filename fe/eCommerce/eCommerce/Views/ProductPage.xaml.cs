@@ -8,9 +8,6 @@ namespace eCommerce.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductPage : ContentPage
     {
-        double lastScrollIndex;
-        double currentScrollIndex;
-
         private ProductViewModel viewModel;
 
         public ProductPage(long? itemId)
@@ -24,20 +21,6 @@ namespace eCommerce.Views
             BindingContext = viewModel;
 
             viewModel.LoadProductDetails(validItemId);
-        }
-
-        private void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
-        {
-            currentScrollIndex = e.ScrollY;
-            if (currentScrollIndex > lastScrollIndex)
-            {
-                footer.IsVisible = false;
-            }
-            else
-            {
-                footer.IsVisible = true;
-            }
-            lastScrollIndex = currentScrollIndex;
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)

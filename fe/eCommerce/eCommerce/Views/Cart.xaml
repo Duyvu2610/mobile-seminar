@@ -52,7 +52,7 @@
                                                 <Image
                                                     Aspect="AspectFit"
                                                     HeightRequest="120"
-                                                    Source="{Binding image}"
+                                                    Source="{Binding itemImg}"
                                                     WidthRequest="120" />
                                             </StackLayout>
 
@@ -61,7 +61,7 @@
                                                 <Label
                                                     FontSize="16"
                                                     HorizontalOptions="StartAndExpand"
-                                                    Text="{Binding name}"
+                                                    Text="{Binding itemName}"
                                                     TextColor="Black">
                                                     <Label.FontFamily>
                                                         <OnPlatform x:TypeArguments="x:String">
@@ -96,48 +96,6 @@
                                                             <Label
                                                                 FontSize="16"
                                                                 HorizontalOptions="Center"
-                                                                Text="+"
-                                                                TextColor="Black"
-                                                                VerticalOptions="CenterAndExpand"
-                                                                VerticalTextAlignment="Center">
-                                                                <Label.FontFamily>
-                                                                    <OnPlatform x:TypeArguments="x:String">
-                                                                        <On Platform="Android" Value="SFPro.ttf#Bold" />
-                                                                    </OnPlatform>
-                                                                </Label.FontFamily>
-                                                            </Label>
-                                                            <StackLayout.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding IncreaseTapCommand}" CommandParameter="{Binding numbers}" />
-                                                            </StackLayout.GestureRecognizers>
-                                                        </StackLayout>
-
-                                                        <StackLayout
-                                                            HeightRequest="40"
-                                                            VerticalOptions="FillAndExpand"
-                                                            WidthRequest="40">
-                                                            <Label
-                                                                FontSize="16"
-                                                                HorizontalOptions="Center"
-                                                                Text="{Binding numbers}"
-                                                                TextColor="Black"
-                                                                VerticalOptions="CenterAndExpand"
-                                                                VerticalTextAlignment="Center">
-                                                                <Label.FontFamily>
-                                                                    <OnPlatform x:TypeArguments="x:String">
-                                                                        <On Platform="Android" Value="SFPro.ttf#Bold" />
-                                                                    </OnPlatform>
-                                                                </Label.FontFamily>
-                                                            </Label>
-                                                        </StackLayout>
-
-
-                                                        <StackLayout
-                                                            HeightRequest="40"
-                                                            VerticalOptions="FillAndExpand"
-                                                            WidthRequest="40">
-                                                            <Label
-                                                                FontSize="16"
-                                                                HorizontalOptions="Center"
                                                                 Text="-"
                                                                 TextColor="Black"
                                                                 VerticalOptions="CenterAndExpand"
@@ -149,7 +107,49 @@
                                                                 </Label.FontFamily>
                                                             </Label>
                                                             <StackLayout.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding DecreseTapCommand}" CommandParameter="{Binding .}" />
+                                                                <TapGestureRecognizer Command="{Binding DecreseTapCommand}"  CommandParameter="{Binding .}" />
+                                                            </StackLayout.GestureRecognizers>
+                                                        </StackLayout>
+
+                                                        <StackLayout
+                                                            HeightRequest="40"
+                                                            VerticalOptions="FillAndExpand"
+                                                            WidthRequest="40">
+                                                            <Label
+                                                                FontSize="16"
+                                                                HorizontalOptions="Center"
+                                                                Text="{Binding quantity}"
+                                                                TextColor="Black"
+                                                                VerticalOptions="CenterAndExpand"
+                                                                VerticalTextAlignment="Center">
+                                                                <Label.FontFamily>
+                                                                    <OnPlatform x:TypeArguments="x:String">
+                                                                        <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                                    </OnPlatform>
+                                                                </Label.FontFamily>
+                                                            </Label>
+                                                        </StackLayout>
+
+
+                                                        <StackLayout
+                                                            HeightRequest="40"
+                                                            VerticalOptions="FillAndExpand"
+                                                            WidthRequest="40">
+                                                            <Label
+                                                                FontSize="16"
+                                                                HorizontalOptions="Center"
+                                                                Text="+"
+                                                                TextColor="Black"
+                                                                VerticalOptions="CenterAndExpand"
+                                                                VerticalTextAlignment="Center">
+                                                                <Label.FontFamily>
+                                                                    <OnPlatform x:TypeArguments="x:String">
+                                                                        <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                                    </OnPlatform>
+                                                                </Label.FontFamily>
+                                                            </Label>
+                                                            <StackLayout.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding IncreaseTapCommand}" CommandParameter="{Binding quantity}"/>
                                                             </StackLayout.GestureRecognizers>
                                                         </StackLayout>
 
@@ -215,15 +215,10 @@
                                     Margin="30,0,35,0"
                                     FontSize="18"
                                     HorizontalOptions="Center"
-                                    Text="$7500"
+                                    Text="{Binding TotalAmount}"
                                     TextColor="#00C569"
                                     VerticalOptions="CenterAndExpand"
                                     VerticalTextAlignment="Center">
-                                    <Label.FontFamily>
-                                        <OnPlatform x:TypeArguments="x:String">
-                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
-                                        </OnPlatform>
-                                    </Label.FontFamily>
                                 </Label>
 
                             </StackLayout>
@@ -244,11 +239,6 @@
                                     Text="CHECKOUT"
                                     TextColor="White"
                                     VerticalTextAlignment="Center">
-                                    <Label.FontFamily>
-                                        <OnPlatform x:TypeArguments="x:String">
-                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
-                                        </OnPlatform>
-                                    </Label.FontFamily>
                                 </Label>
                             </Frame>
                         </StackLayout>

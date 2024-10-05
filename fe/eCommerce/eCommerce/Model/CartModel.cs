@@ -6,10 +6,11 @@ namespace eCommerce.Model
 {
     public class CartModel : INotifyPropertyChanged
     {
-        public string image { get; set; }
-        public string name { get; set; }
-        public string price { get; set; }
-        public int numbers { get; set; }
+        public long itemId { get; set; }
+        public string itemImg { get; set; }
+        public string itemName { get; set; }
+        public int price { get; set; }
+        public int quantity { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;  
         protected virtual void OnPropertyChanged(string propertyName)
@@ -26,11 +27,11 @@ namespace eCommerce.Model
             {
                 return new Command(val =>
                 {
-                    var modelObj = (CartModel)val;
-                    if (modelObj.numbers >= 2)
-                    {                        
-                        numbers = (modelObj.numbers - 1);
-                        OnPropertyChanged("numbers");
+                    var modelObj = (CartModel) val;
+                    if (modelObj.quantity >= 2)
+                    {
+                        quantity = (modelObj.quantity - 1);
+                        OnPropertyChanged("quantity");
                     }
                    
 
@@ -44,10 +45,8 @@ namespace eCommerce.Model
             {
                 return new Command(val =>
                 {
-                    numbers = (Int16.Parse(val.ToString()) + 1);
-                    OnPropertyChanged("numbers");
-
-
+                    quantity = (Int16.Parse(val.ToString()) + 1);
+                    OnPropertyChanged("quantity");
                 });
             }
         }
