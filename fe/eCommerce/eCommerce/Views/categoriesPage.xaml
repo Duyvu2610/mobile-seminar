@@ -203,7 +203,7 @@
                                                         <Image
                                                             Aspect="AspectFit"
                                                             HeightRequest="240"
-                                                            Source="{Binding ImageUrl}"
+                                                            Source="{Binding imageUrl}"
                                                             WidthRequest="165" />
                                                     </Frame>
                                                 </StackLayout>
@@ -212,14 +212,9 @@
                                                     <Label
                                                         FontSize="16"
                                                         HorizontalOptions="Center"
-                                                        Text="{Binding Name}"
+                                                        Text="{Binding name}"
                                                         TextColor="Black"
                                                         VerticalOptions="Start">
-                                                        <Label.FontFamily>
-                                                            <OnPlatform x:TypeArguments="x:String">
-                                                                <On Platform="Android" Value="SFPro.ttf#Bold" />
-                                                            </OnPlatform>
-                                                        </Label.FontFamily>
                                                     </Label>
 
                                                     <Label
@@ -228,11 +223,6 @@
                                                         Text="{Binding brand}"
                                                         TextColor="#929292"
                                                         VerticalOptions="Start">
-                                                        <Label.FontFamily>
-                                                            <OnPlatform x:TypeArguments="x:String">
-                                                                <On Platform="Android" Value="SFPro.ttf#Bold" />
-                                                            </OnPlatform>
-                                                        </Label.FontFamily>
                                                     </Label>
 
                                                     <Label
@@ -241,11 +231,6 @@
                                                         Text="{Binding price}"
                                                         TextColor="#00C569"
                                                         VerticalOptions="Start">
-                                                        <Label.FontFamily>
-                                                            <OnPlatform x:TypeArguments="x:String">
-                                                                <On Platform="Android" Value="SFPro.ttf#Bold" />
-                                                            </OnPlatform>
-                                                        </Label.FontFamily>
                                                     </Label>
                                                 </StackLayout>
                                             </StackLayout>

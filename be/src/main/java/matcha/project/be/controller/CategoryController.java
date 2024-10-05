@@ -3,6 +3,7 @@ package matcha.project.be.controller;
 import lombok.RequiredArgsConstructor;
 import matcha.project.be.dto.CategoryResponseDto;
 import matcha.project.be.dto.ItemResponseDto;
+import matcha.project.be.entity.ItemEntity;
 import matcha.project.be.service.CategoryService;
 import matcha.project.be.service.ItemService;
 import org.springframework.beans.BeanUtils;
@@ -33,7 +34,13 @@ public class CategoryController {
     }
     @GetMapping("/{categoryId}")
     public ResponseEntity<List<ItemResponseDto>> getItemsByCategoryId(@PathVariable Long categoryId) {
-        List<ItemResponseDto> items = itemService.getItemsByCategoryId(categoryId);
-        return ResponseEntity.ok(items);
+        List<ItemEntity> items = itemService.getItemsByCategoryId(categoryId);
+        List<ItemResponseDto> itemResponseDtos = items.stream()
+                .map(item -> {
+                    ItemResponseDto itemResponseDto = new ItemResponseDto();
+                    BeanUtils.copyProperties(item, itemResponseDto);
+                    return itemResponseDto;
+                }).toList();
+        return ResponseEntity.ok(itemResponseDtos);
     }
 }

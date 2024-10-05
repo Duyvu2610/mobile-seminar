@@ -10,13 +10,11 @@ public class CategoryApi
     private readonly HttpClient _httpClient;
     public CategoryApi()
     {
-        _httpClient = new HttpClient();
+        _httpClient = ApiConfig.GetClient();
     }
 
     public async Task<List<Category>> GetCategories()
     {
-        string url = "http://192.168.171.1:8080/category";
-        var response = await _httpClient.GetAsync(url);
         var response = await _httpClient.GetAsync("/category");
         response.EnsureSuccessStatusCode();
 
@@ -25,7 +23,7 @@ public class CategoryApi
     }
     public async Task<List<Item>> GetItemsByCategoryId(long categoryId)
         {
-            string url = $"http://192.168.171.1:8080/category/{categoryId}";
+            string url = $"/category/{categoryId}";
             var response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
 

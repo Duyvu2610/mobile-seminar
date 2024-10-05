@@ -37,23 +37,7 @@ public class ItemService {
             return  itemDao.findAllByOrderByAmountSoldDesc();
     }
 
-    public List<ItemResponseDto> getItemsByCategoryId(Long categoryId) {
-        List<ItemEntity> items = itemDao.findItemsByCategoryId(categoryId);  // Lấy dữ liệu từ DB
-        return items.stream()
-                .map(this::convertToItemResponseDto)  // Chuyển đổi từ Entity sang DTO
-                .collect(Collectors.toList());
-    }
-
-    // Chuyển đổi từ ItemEntity sang ItemResponseDto
-    private ItemResponseDto convertToItemResponseDto(ItemEntity itemEntity) {
-        ItemResponseDto dto = new ItemResponseDto();
-        dto.setId(itemEntity.getId());
-        dto.setName(itemEntity.getName());
-        dto.setBrand(itemEntity.getBrand());
-        dto.setPrice(itemEntity.getPrice());
-        dto.setImageUrl(itemEntity.getImageUrl());
-        dto.setAmountSold(itemEntity.getAmountSold());
-        dto.setIsRecommended(itemEntity.getIsRecommended());
-        return dto;
+    public List<ItemEntity> getItemsByCategoryId(Long categoryId) {
+        return itemDao.findItemEntitiesByCategoryId(categoryId);
     }
 }
