@@ -1,38 +1,38 @@
 ﻿using eCommerce.Views;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace eCommerce.Model
-{  
+{
     public class categoriesViewModel : INotifyPropertyChanged
     {
         readonly IList<FeaturedBrands> source1;
+
         public ObservableCollection<FeaturedBrands> featuredItemPreview { get; private set; }
 
-        readonly IList<ItemsPreview> source;
-        public ObservableCollection<ItemsPreview> itemPreview { get; private set; }
+        public ObservableCollection<Item> itemPreview { get; private set; }
+
+        private readonly CategoryApi _categoryApi;
 
         public ICommand FeaturedTapCommand { get; set; }
+
         public ICommand ItemTapCommand { get; set; }
+
         public categoriesViewModel()
         {
-            source = new List<ItemsPreview>();
+            _categoryApi = new CategoryApi();
             source1 = new List<FeaturedBrands>();
-            CreateItemCollection();
             CreateFeaturedItemCollection();
 
-            ItemTapCommand = new Command<ItemsPreview>(items =>
+            ItemTapCommand = new Command<Item>(items =>
             {
-                // Truyền itemId vào ProductPage
-                long itemId = items.Id;  // Giả sử ItemsPreview có thuộc tính Id
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync((new ProductPage(itemId)));
+                long itemId = items.id;
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new ProductPage(itemId));
             });
 
             FeaturedTapCommand = new Command<FeaturedBrands>(brand =>
@@ -40,42 +40,16 @@ namespace eCommerce.Model
                 string selBrand = brand.brand;
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new BrandPage(selBrand)));
             });
-        }       
-
-        void CreateItemCollection()
-        {
-            source.Add(new ItemsPreview
-            {
-                ImageUrl = "Image3",
-                Name = "Smart Bluetooth Speaker",
-                brand = "Google LLC",
-                price = "$90"
-            });
-            source.Add(new ItemsPreview
-            {
-                ImageUrl = "Image5",
-                Name = "Smart Luggage",
-                brand = "Smart Inc",
-                price = "$450"
-            });
-            source.Add(new ItemsPreview
-            {
-                ImageUrl = "Image6",
-                Name = "Wireless Remote",
-                brand = "Tesla Inc",
-                price = "$790"
-            });
-            source.Add(new ItemsPreview
-            {
-                ImageUrl = "Image4",
-                Name = "Airpods",
-                brand = "Apple Inc",
-                price = "$120"
-            });
-            itemPreview = new ObservableCollection<ItemsPreview>(source);
         }
 
-        void CreateFeaturedItemCollection()
+        public async Task GetListByIdCategory(long categoryId)
+        {
+            List<Item> items = await _categoryApi.GetItemsByCategoryId(categoryId);
+            itemPreview = new ObservableCollection<Item>(items);
+            OnPropertyChanged(nameof(itemPreview));
+        }
+
+        private void CreateFeaturedItemCollection()
         {
             source1.Add(new FeaturedBrands
             {
@@ -99,16 +73,13 @@ namespace eCommerce.Model
             featuredItemPreview = new ObservableCollection<FeaturedBrands>(source1);
         }
 
-      
-        #region INotifyPropertyChanged
+        #region INotifyPropertyChanged  
         public event PropertyChangedEventHandler PropertyChanged;
 
-        void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }
-
-
 }

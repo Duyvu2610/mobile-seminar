@@ -24,7 +24,7 @@ public class ItemApi
     }
     public async Task<List<ItemsPreview>> GetItemBestSellingg()
     {
-        string url = $"/items/best-selling";   
+        string url = $"/items/best-selling";
         var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
 

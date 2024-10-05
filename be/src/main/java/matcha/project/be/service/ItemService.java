@@ -4,12 +4,14 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import matcha.project.be.dao.ItemDao;
+import matcha.project.be.dto.ItemResponseDto;
 import matcha.project.be.entity.ItemEntity;
 import matcha.project.be.enums.ItemError;
 import matcha.project.be.exception.ItemException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +35,9 @@ public class ItemService {
 
     public List<ItemEntity> getBestSellingItems() {
             return  itemDao.findAllByOrderByAmountSoldDesc();
+    }
+
+    public List<ItemEntity> getItemsByCategoryId(Long categoryId) {
+        return itemDao.findItemEntitiesByCategoryId(categoryId);
     }
 }

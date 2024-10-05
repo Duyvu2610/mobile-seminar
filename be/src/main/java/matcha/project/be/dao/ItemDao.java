@@ -11,5 +11,5 @@ public interface ItemDao  extends JpaRepository<ItemEntity, Long> {
 
     List<ItemEntity> findByIsRecommendedTrue();
     List<ItemEntity> findAllByOrderByAmountSoldDesc();
-
+    List<ItemEntity> findItemEntitiesByCategoryId(Long categoryId);
 }

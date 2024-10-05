@@ -54,8 +54,8 @@ namespace eCommerce.Model
 
             CatTapCommand = new Command<Category>(items =>
             {
-                string selcate = items.title;
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new categoriesPage(selcate));
+                long id = items.id;
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new categoriesPage(id));
             });
 
             FeaturedTapCommand = new Command<FeaturedBrands>(brand =>

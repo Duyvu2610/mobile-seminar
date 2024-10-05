@@ -146,14 +146,8 @@
                                 <StackLayout Margin="10,5,0,5">
                                     <Label
                                         FontSize="16"
-                                        HorizontalOptions="EndAndExpand"
                                         Text="See All"
                                         TextColor="Black">
-                                        <Label.FontFamily>
-                                            <OnPlatform x:TypeArguments="x:String">
-                                                <On Platform="Android" Value="SFPro.ttf#Bold" />
-                                            </OnPlatform>
-                                        </Label.FontFamily>
                                     </Label>
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />

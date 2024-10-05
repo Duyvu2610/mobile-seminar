@@ -3,6 +3,7 @@ package matcha.project.be.controller;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import matcha.project.be.dto.ItemResponseDto;
 import matcha.project.be.entity.ItemEntity;
 import matcha.project.be.service.ItemService;
 import org.springframework.http.ResponseEntity;
@@ -41,4 +42,5 @@ public class ItemController {
         List<ItemEntity> recommendedItems = itemService.getRecommendedItems();
         return ResponseEntity.ok(recommendedItems);
     }
+
 }
