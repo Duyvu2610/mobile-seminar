@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace eCommerce.Model
@@ -10,45 +12,41 @@ namespace eCommerce.Model
         public string itemImg { get; set; }
         public string itemName { get; set; }
         public int price { get; set; }
+
         public int quantity { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;  
-        protected virtual void OnPropertyChanged(string propertyName)
+       
+        public int Price
         {
-            var changed = PropertyChanged;
-            if (changed != null)
+            get => price;
+            set
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        public Command DecreseTapCommand
-        {
-            get
-            {
-                return new Command(val =>
+                if (price != value)
                 {
-                    var modelObj = (CartModel) val;
-                    if (modelObj.quantity >= 2)
-                    {
-                        quantity = (modelObj.quantity - 1);
-                        OnPropertyChanged("quantity");
-                    }
-                   
-
-                });
+                    price = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
-        public Command IncreaseTapCommand
+        public int Quantity
         {
-            get
+            get => quantity;
+            set
             {
-                return new Command(val =>
+                if (quantity != value)
                 {
-                    quantity = (Int16.Parse(val.ToString()) + 1);
-                    OnPropertyChanged("quantity");
-                });
+                    quantity = value;
+                    OnPropertyChanged();
+                }
             }
         }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }
