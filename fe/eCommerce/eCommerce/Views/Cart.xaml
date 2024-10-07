@@ -93,7 +93,9 @@
                                                             HeightRequest="40"
                                                             VerticalOptions="FillAndExpand"
                                                             WidthRequest="40">
+                                                          
                                                             <Label
+                                                               
                                                                 FontSize="16"
                                                                 HorizontalOptions="Center"
                                                                 Text="-"
@@ -107,10 +109,11 @@
                                                                 </Label.FontFamily>
                                                             </Label>
                                                             <StackLayout.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding DecreseTapCommand}"  CommandParameter="{Binding .}" />
+                                                                <TapGestureRecognizer Command="{Binding Source={x:Reference collectionView},Path=BindingContext.DecreaseQuantityCommand}" 
+                                                                                      CommandParameter="{Binding .}" />
                                                             </StackLayout.GestureRecognizers>
                                                         </StackLayout>
-
+                                                              
                                                         <StackLayout
                                                             HeightRequest="40"
                                                             VerticalOptions="FillAndExpand"
@@ -118,7 +121,7 @@
                                                             <Label
                                                                 FontSize="16"
                                                                 HorizontalOptions="Center"
-                                                                Text="{Binding quantity}"
+                                                                Text="{Binding Quantity}"
                                                                 TextColor="Black"
                                                                 VerticalOptions="CenterAndExpand"
                                                                 VerticalTextAlignment="Center">
@@ -149,7 +152,8 @@
                                                                 </Label.FontFamily>
                                                             </Label>
                                                             <StackLayout.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding IncreaseTapCommand}" CommandParameter="{Binding quantity}"/>
+                                                                <TapGestureRecognizer Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.IncreaseQuantityCommand}" 
+                                                                                      CommandParameter="{Binding .}"/>
                                                             </StackLayout.GestureRecognizers>
                                                         </StackLayout>
 

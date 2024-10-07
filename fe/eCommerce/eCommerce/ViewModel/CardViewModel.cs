@@ -11,10 +11,14 @@ namespace eCommerce.Model
 {
     public class CardViewModel : INotifyPropertyChanged
     {
+        
         private readonly CartApi _cartApi;
 
         private int _totalAmount;
-
+        public ICommand IncreaseQuantityCommand { get; }
+        public ICommand DecreaseQuantityCommand { get; }
+        public int quantity { get; set; }
+        
         public int TotalAmount
         {
             get => _totalAmount;
@@ -27,6 +31,7 @@ namespace eCommerce.Model
                 }
             }
         }
+       
 
         public ObservableCollection<int> totalAmount { get; set; }
 
@@ -38,6 +43,24 @@ namespace eCommerce.Model
         {
             _cartApi = new CartApi();
             GetCartList();
+            IncreaseQuantityCommand = new Command<CartModel>(IncreaseQuantity);
+            DecreaseQuantityCommand = new Command<CartModel>(DecreaseQuantity);
+        }
+        private void IncreaseQuantity(CartModel modelObj)
+        {
+            modelObj.Quantity++;
+            CalculateTotalAmount();
+            
+        }
+
+        private void DecreaseQuantity(CartModel modelObj)
+        {
+            if (modelObj.Quantity > 1) 
+            {
+                modelObj.Quantity--;
+                CalculateTotalAmount();
+                
+            }
         }
 
         void RemoveCart(CartModel cart)
@@ -45,6 +68,7 @@ namespace eCommerce.Model
             if (itemPreview.Contains(cart))
             {
                 itemPreview.Remove(cart);
+                CalculateTotalAmount();
             }
         }
 
@@ -52,17 +76,23 @@ namespace eCommerce.Model
         {
             List<CartModel> cartModels = await _cartApi.GetCartList();
             itemPreview = new ObservableCollection<CartModel>(cartModels);
-
-            int total = 0;
-            foreach (CartModel item in cartModels)
-            {
-                total += item.price * item.quantity;
-            }
-            TotalAmount = total;
+               
+            
+            CalculateTotalAmount();
 
 
             OnPropertyChanged(nameof(itemPreview));
         }
+        private void CalculateTotalAmount()
+        {
+            int total = 0;
+            foreach (CartModel item in itemPreview)
+            {
+                total += item.price * item.quantity;
+            }
+            TotalAmount = total;
+        } 
+
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -72,5 +102,6 @@ namespace eCommerce.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+       
     }
 }
