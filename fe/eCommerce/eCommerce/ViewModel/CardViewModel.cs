@@ -46,27 +46,30 @@ namespace eCommerce.Model
             IncreaseQuantityCommand = new Command<CartModel>(IncreaseQuantity);
             DecreaseQuantityCommand = new Command<CartModel>(DecreaseQuantity);
         }
-        private void IncreaseQuantity(CartModel modelObj)
+        async private void IncreaseQuantity(CartModel cartModel)
         {
-            modelObj.Quantity++;
+            await _cartApi.UpdateCart(cartModel.itemId, cartModel.quantity + 1);
+            cartModel.Quantity++;
             CalculateTotalAmount();
             
         }
 
-        private void DecreaseQuantity(CartModel modelObj)
+        async private void DecreaseQuantity(CartModel cartModel)
         {
-            if (modelObj.Quantity > 1) 
+            if (cartModel.Quantity > 1) 
             {
-                modelObj.Quantity--;
+                await _cartApi.UpdateCart(cartModel.itemId, cartModel.quantity - 1);
+                cartModel.Quantity--;
                 CalculateTotalAmount();
                 
             }
-        }
+        } 
 
-        void RemoveCart(CartModel cart)
+        async void RemoveCart(CartModel cart)
         {
             if (itemPreview.Contains(cart))
             {
+                await _cartApi.RemoveCart(cart.itemId);
                 itemPreview.Remove(cart);
                 CalculateTotalAmount();
             }

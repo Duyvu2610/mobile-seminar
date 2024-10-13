@@ -55,5 +55,42 @@ namespace eCommerce.Services
                 return false; 
             }
         }
+
+        public async Task<bool> RemoveCart(long itemId)
+        {
+            try
+            {
+                var response = await _httpClient.DeleteAsync("/cart/" + itemId);
+                response.EnsureSuccessStatusCode();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while adding to cart: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateCart(long itemId, int quantity)
+        {
+            try
+            {
+                string json = JsonConvert.SerializeObject(quantity);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PutAsync("/cart/" + itemId, content);
+                response.EnsureSuccessStatusCode();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while adding to cart: {ex.Message}");
+                return false;
+            }
+        }
+
+
     }
 }
