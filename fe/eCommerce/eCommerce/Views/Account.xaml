@@ -31,7 +31,7 @@
                                 FontAttributes="Bold"
                                 FontSize="26"
                                 HorizontalOptions="CenterAndExpand"
-                                Text="David Spade"
+                                Text="User Name"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center">
                                 <Label.FontFamily>
@@ -44,7 +44,7 @@
                             <Label
                                 FontSize="14"
                                 HorizontalOptions="CenterAndExpand"
-                                Text="iamdavid@gmail.com"
+                                Text="tttttttttttt@gmail.com"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center">
                                 <Label.FontFamily>
