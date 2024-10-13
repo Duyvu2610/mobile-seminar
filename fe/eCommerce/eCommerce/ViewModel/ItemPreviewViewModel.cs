@@ -47,8 +47,7 @@ namespace eCommerce.Model
             CreatItemsRecommendColection();
             ItemTapCommand = new Command<ItemsPreview>(items =>
             {
-                // Truyền itemId vào ProductPage
-                long itemId = items.Id;  // Giả sử ItemsPreview có thuộc tính Id
+                long itemId = items.Id; 
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new ProductPage(itemId));
             });
 

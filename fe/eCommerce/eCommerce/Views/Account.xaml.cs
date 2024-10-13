@@ -17,11 +17,6 @@ namespace eCommerce.Views
             InitializeComponent();
         }
 
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new TrackOrder());
-        }
-
         private async void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new Cart());
