@@ -34,4 +34,14 @@ public class CartService {
         cartDao.save(cartEntity);
     }
 
+    public void deleteCart(Long id) {
+        cartDao.deleteById(id);
+    }
+
+    public void updateCart(Long id, Long quantity) {
+        final CartEntity cartEntity = cartDao.findById(id).orElseThrow();
+        cartEntity.setQuantity(quantity);
+        cartDao.save(cartEntity);
+    }
+
 }

@@ -37,4 +37,16 @@ public class CartController {
         cartService.createCart(cartRequestDto);
         return ResponseEntity.created(null).build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteCart(@PathVariable Long id) {
+        cartService.deleteCart(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateCart(@PathVariable Long id, @RequestBody Long quantity) {
+        cartService.updateCart(id, quantity);
+        return ResponseEntity.noContent().build();
+    }
 }
