@@ -23,12 +23,6 @@ public class ItemService {
         return itemDao.findById(id).orElseThrow(() -> new ItemException(ItemError.ITEM_NOT_FOUND));
     }
 
-
-
-    public List<ItemEntity> getBestSellingItemsByCategory(Long categoryId) {
-        return itemDao.findByCategoryIdOrderByAmountSoldDesc(categoryId);
-    }
-
     public List<ItemEntity> getRecommendedItems() {
         return itemDao.findByIsRecommendedTrue();
     }

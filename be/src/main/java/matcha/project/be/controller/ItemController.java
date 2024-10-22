@@ -31,12 +31,6 @@ public class ItemController {
         return ResponseEntity.ok(bestSellingItems);
     }
 
-    @GetMapping("/best-selling/{categoryId}")
-    public ResponseEntity<List<ItemEntity>> getBestSellingItemsByCategory(@PathVariable Long categoryId) {
-        List<ItemEntity> bestSellingItems = itemService.getBestSellingItemsByCategory(categoryId);
-        return ResponseEntity.ok(bestSellingItems);
-    }
-
     @GetMapping("/recommended")
     public ResponseEntity<List<ItemEntity>> getRecommendedItems() {
         List<ItemEntity> recommendedItems = itemService.getRecommendedItems();

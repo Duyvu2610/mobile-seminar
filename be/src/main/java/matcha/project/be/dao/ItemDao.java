@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface ItemDao  extends JpaRepository<ItemEntity, Long> {
-    List<ItemEntity> findByCategoryIdOrderByAmountSoldDesc(Long categoryId);
 
     List<ItemEntity> findByIsRecommendedTrue();
+
     List<ItemEntity> findAllByOrderByAmountSoldDesc();
+
     List<ItemEntity> findItemEntitiesByCategoryId(Long categoryId);
 }
